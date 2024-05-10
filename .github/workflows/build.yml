@@ -9,10 +9,10 @@ jobs:
     runs-on: macOS-12
 
     steps:
-    - uses: actions/checkout@v3.0.0
+    - uses: actions/checkout@v4.2.0
         
     - name: "Get cache: VLC"
-      uses: actions/cache@v3.0.0
+      uses: actions/cache@v4.2.0
       id: cache
       with:
         path: |
@@ -49,7 +49,7 @@ jobs:
         zip -r PopcornTime-tvOS.ipa Payload
         
     - name: Upload
-      uses: actions/upload-artifact@v3.0.0
+      uses: actions/upload-artifact@v4.2.0
       with:
         name: 'PopcornTime-tvOS'
         path: |
