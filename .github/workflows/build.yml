@@ -12,14 +12,14 @@ jobs:
     - uses: actions/checkout@v3.0.0
         
     - name: "Get cache: VLC"
-      uses: actions/cache@v3
+      uses: actions/cache@v3.0.0
       id: cache
       with:
         path: |
           VLCKit
         key: ${{ hashFiles('VLCKit/get-vlc-frameworks.sh') }}-tv
         
-    - uses: actions/cache@v3.0.0
+    - uses: actions/cache@v3
       name: "Get cache: SPM"
       with:
         path: ~/Library/Developer/Xcode/DerivedData/PopcornTime*/SourcePackages/
