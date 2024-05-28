@@ -19,7 +19,7 @@ jobs:
           VLCKit
         key: ${{ hashFiles('VLCKit/get-vlc-frameworks.sh') }}-tv
         
-    - uses: actions/cache@v4
+    - uses: actions/cache@v3.0.0
       name: "Get cache: SPM"
       with:
         path: ~/Library/Developer/Xcode/DerivedData/PopcornTime*/SourcePackages/
