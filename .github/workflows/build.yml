@@ -23,8 +23,8 @@ jobs:
          # ruby-version: '3.4.0'
      
       - name: Install Bundler
-        run: xcode-select -p
-       # run: gem install bundler
+        #run: xcode-select -p
+        run: gem install bundler
 
       - name: Install Ruby dependencies
         run: bundle install
@@ -35,7 +35,7 @@ jobs:
         run: bundle exec pod install
 
       - name: Set Xcode version
-        run: sudo xcode-select -s /Applications/Xcode_14.3.app/Contents/Developer  # Or whatever version works best
+        run: sudo xcode-select -s /Applications/Xcode_15.4.app/Contents/Developer # Or whatever version works best
       - uses: actions/cache@v4
         name: "Get cache: SPM"
         with:
