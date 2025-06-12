@@ -16,7 +16,7 @@ def pods
 end
 
 target 'PopcornTimeiOS' do
-    platform :ios, '9.0'
+    platform :ios, '12.0'
     pods
     pod 'AlamofireNetworkActivityIndicator', '~> 2.4.0'
     pod 'google-cast-sdk', '~> 4.4'
@@ -26,7 +26,7 @@ target 'PopcornTimeiOS' do
 end
 
 target 'PopcornTimetvOS' do
-    platform :tvos, '10.2'
+    platform :tvos, '12'
     pods
     pod 'TvOSMoreButton', '~> 1.2.0'
     pod 'TVVLCKit', '~> 3.3.0'
@@ -34,7 +34,7 @@ target 'PopcornTimetvOS' do
 end
 
 target 'TopShelf' do
-    platform :tvos, '10.2'
+    platform :tvos, '12.0'
     pod 'ObjectMapper', '~> 3.5.0'
 end
 
@@ -46,12 +46,12 @@ def kitPods
 end
 
 target 'PopcornKit tvOS' do
-    platform :tvos, '10.2'
+    platform :tvos, '12.0'
     kitPods
 end
 
 target 'PopcornKit iOS' do
-    platform :ios, '9.0'
+    platform :ios, '12.0'
     kitPods
     pod 'google-cast-sdk', '~> 4.4'
 end
@@ -59,13 +59,14 @@ end
 post_install do |installer|
     installer.pods_project.targets.each do |target|
         target.build_configurations.each do |config|
+            config.build_settings.delete 'IPHONEOS_DEPLOYMENT_TARGET'
             config.build_settings['EXPANDED_CODE_SIGN_IDENTITY'] = ""
             config.build_settings['CODE_SIGNING_REQUIRED'] = "NO"
             config.build_settings['CODE_SIGNING_ALLOWED'] = "NO"
         end
         if ['FloatRatingView-iOS', 'FloatRatingView-tvOS'].include? target.name
             target.build_configurations.each do |config|
-                config.build_settings['SWIFT_VERSION'] = '4.0'
+                config.build_settings['SWIFT_VERSION'] = '5.0'
             end
         end
     end
