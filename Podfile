@@ -16,7 +16,7 @@ def pods
 end
 
 target 'PopcornTimeiOS' do
-    platform :ios, min_ios_version_supported
+    platform :ios, '12'
     pods
     pod 'AlamofireNetworkActivityIndicator', '~> 2.4.0'
     pod 'google-cast-sdk', '~> 4.4'
@@ -51,7 +51,7 @@ target 'PopcornKit tvOS' do
 end
 
 target 'PopcornKit iOS' do
-    platform :ios, min_ios_version_supported
+    platform :ios, '12'
     kitPods
     pod 'google-cast-sdk', '~> 4.4'
 end
