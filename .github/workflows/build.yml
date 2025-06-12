@@ -9,7 +9,7 @@ jobs:
   build-ios:
     name: iOS
 
-    runs-on: macoos-latest
+    runs-on: macos-latest
 
     steps:
    
