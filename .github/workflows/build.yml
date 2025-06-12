@@ -9,7 +9,7 @@ jobs:
   build-ios:
     name: iOS
 
-    runs-on: macos-latest
+    runs-on: macoos-13
 
     steps:
    
@@ -34,7 +34,7 @@ jobs:
         run: bundle exec pod install
 
       - name: Set Xcode version
-        run: sudo xcode-select -s /Applications/Xcode_14.2.0.app  # Or whatever version works best
+        run: sudo xcode-select -s /Applications/Xcode_14.3.app  # Or whatever version works best
       - uses: actions/cache@v4
         name: "Get cache: SPM"
         with:
