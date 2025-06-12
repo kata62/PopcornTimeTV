@@ -23,7 +23,8 @@ jobs:
          # ruby-version: '3.4.0'
      
       - name: Install Bundler
-        run: gem install bundler
+        run: xcode-select -p
+       # run: gem install bundler
 
       - name: Install Ruby dependencies
         run: bundle install
