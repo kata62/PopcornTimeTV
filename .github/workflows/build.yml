@@ -33,8 +33,8 @@ jobs:
       - name: Install CocoaPods
         run: bundle exec pod install
 
-      #- name: Set Xcode version
-       # run: sudo xcode-select -s /Applications/Xcode_14.3.app  # Or whatever version works best
+      - name: Set Xcode version
+        run: sudo xcode-select -s /Applications/Xcode_14.2.0.app  # Or whatever version works best
       - uses: actions/cache@v4
         name: "Get cache: SPM"
         with:
