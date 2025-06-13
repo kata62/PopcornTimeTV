@@ -47,7 +47,7 @@ jobs:
       - name: Build the app (PopcornTime.xcworkspace)
         run: |
           xcodebuild archive \
-          -workspace PopcornTime.xcworkspace \
+          -project PopcornTime.xcodeproj \
           -scheme PopcornTimeiOS \
           -configuration Release \
           CODE_SIGN_IDENTITY= \
