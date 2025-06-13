@@ -16,7 +16,7 @@ def pods
 end
 
 target 'PopcornTimeiOS' do
-    platform :ios, '12'
+    platform :ios, '15.6'
     pods
     pod 'AlamofireNetworkActivityIndicator', '~> 2.4.0'
     pod 'google-cast-sdk', '~> 4.4'
@@ -26,7 +26,7 @@ target 'PopcornTimeiOS' do
 end
 
 target 'PopcornTimetvOS' do
-    platform :tvos, '12'
+    platform :tvos, '15.6'
     pods
     pod 'TvOSMoreButton', '~> 1.2.0'
     pod 'TVVLCKit', '~> 3.3.0'
@@ -34,7 +34,7 @@ target 'PopcornTimetvOS' do
 end
 
 target 'TopShelf' do
-    platform :tvos, '12.0'
+    platform :tvos, '15.6'
     pod 'ObjectMapper', '~> 3.5.0'
 end
 
@@ -46,12 +46,12 @@ def kitPods
 end
 
 target 'PopcornKit tvOS' do
-    platform :tvos, '12.0'
+    platform :tvos, '15.6'
     kitPods
 end
 
 target 'PopcornKit iOS' do
-    platform :ios, '12'
+    platform :ios, '15.6'
     kitPods
     pod 'google-cast-sdk', '~> 4.4'
 end
@@ -67,7 +67,7 @@ post_install do |installer|
         end
         if ['FloatRatingView-iOS', 'FloatRatingView-tvOS'].include? target.name
             target.build_configurations.each do |config|
-                config.build_settings['SWIFT_VERSION'] = '4.0'
+                config.build_settings['SWIFT_VERSION'] = '5.0'
             end
         end 
     end
