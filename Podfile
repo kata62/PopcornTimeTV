@@ -59,7 +59,7 @@ end
 post_install do |installer|
     installer.pods_project.targets.each do |target|
         target.build_configurations.each do |config|
-            #config.build_settings['IPHONEOS_DEPLOYMENT_TARGET'] = '12'
+            #config.build_settings['IPHONEOS_DEPLOYMENT_TARGET'] = '15.6'
             config.build_settings.delete 'IPHONEOS_DEPLOYMENT_TARGET'
             config.build_settings['EXPANDED_CODE_SIGN_IDENTITY'] = ""
             config.build_settings['CODE_SIGNING_REQUIRED'] = "NO"
@@ -67,7 +67,7 @@ post_install do |installer|
         end
         if ['FloatRatingView-iOS', 'FloatRatingView-tvOS'].include? target.name
             target.build_configurations.each do |config|
-                config.build_settings['SWIFT_VERSION'] = '5.0'
+                config.build_settings['SWIFT_VERSION'] = '4.0'
             end
         end 
     end
