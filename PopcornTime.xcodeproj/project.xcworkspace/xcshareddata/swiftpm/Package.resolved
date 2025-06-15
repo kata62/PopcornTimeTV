@@ -15,8 +15,8 @@
         "repositoryURL": "https://github.com/onevcat/Kingfisher",
         "state": {
           "branch": null,
-          "revision": "3f6992b5cd3143e83b02300ea59c400d4cf0747a",
-          "version": "7.8.0"
+          "revision": "2ef543ee21d63734e1c004ad6c870255e8716c50",
+          "version": "7.12.0"
         }
       },
       {
@@ -24,8 +24,8 @@
         "repositoryURL": "https://github.com/tristanhimmelman/ObjectMapper",
         "state": {
           "branch": null,
-          "revision": "0b96a734de3ea1c87374ae677064f86adb0716ec",
-          "version": "4.2.0"
+          "revision": "6021c6035e83a306047348666f6400dc61445d3b",
+          "version": "4.4.3"
         }
       },
       {
@@ -33,7 +33,7 @@
         "repositoryURL": "https://github.com/alextud/PopcornTorrent",
         "state": {
           "branch": "v2_3",
-          "revision": "7a42da50ed1363862c8bd294c3eaf6420916463d",
+          "revision": "ec98cb40aca5dde4f50625910831423db2fcbd19",
           "version": null
         }
       },
@@ -42,8 +42,8 @@
         "repositoryURL": "https://github.com/SwiftyJSON/SwiftyJSON",
         "state": {
           "branch": null,
-          "revision": "b3dcd7dbd0d488e1a7077cb33b00f2083e382f07",
-          "version": "5.0.1"
+          "revision": "af76cf3ef710b6ca5f8c05f3a31307d44a3c5828",
+          "version": "5.0.2"
         }
       }
     ]
