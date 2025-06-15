@@ -9,16 +9,13 @@
 import SwiftUI
 import PopcornTorrent
 
-#if os(macOS)
-typealias NavigationView = NavigationStack // workaround to use NavigationStack on macOS as there are some bugs on ios/tvos with SeasonPickerButton - not working
-#endif
 
 @main
 struct PopcornTime: App {
     
     var body: some Scene {
         WindowGroup {
-            NavigationView {
+            NavigationStack {
                 TabBarView()
                     .modifier(AcceptTermsOfService())
                 #if os(iOS) || os(macOS)
