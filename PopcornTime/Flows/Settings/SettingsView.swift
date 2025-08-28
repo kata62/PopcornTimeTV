@@ -35,6 +35,8 @@ struct SettingsView: View {
     @State var openSubtitlesUsername = ""
     @State var openSubtitlesPassword = ""
     
+    @State var selectedSubtitleLanguage = ""
+    
     
     var body: some View {
         HStack (spacing: theme.hStackSpacing) {
@@ -51,16 +53,16 @@ struct SettingsView: View {
                         streamOnCellularButton
                     }
                 }
-                #if os(tvOS) || os(iOS)
                 Section(header: sectionHeader("Subtitles")) {
                     subtitleLanguageButton
+                    #if os(tvOS) || os(iOS)
                     subtitleFontSizeButton
                     subtitleFontColorButton
                     subtitleFontButton
                     subtitleFontStyleButton
                     subtitleEncondingButton
+                    #endif
                 }
-                #endif
                 Section(header: sectionHeader("Services")) {
                     trackButton
                     openSubtitlesButton
@@ -126,17 +128,39 @@ struct SettingsView: View {
         }, message: { Text("Choose a default quality. If said quality is available, it will be automatically selected.") })
     }
 
-#if os(tvOS) || os(iOS)
     @ViewBuilder
     var subtitleLanguageButton: some View {
+        #if os(tvOS) || os(iOS)
         button(text: "Language", value: subtitleSettings.language ?? "None".localized) {
             showSubtitleLanguageAlert = true
         }
         .actionSheet(isPresented: $showSubtitleLanguageAlert) {
             subtitleLanguageAlert
         }
+        #else
+        HStack {
+            Text("Language".localized)
+            Spacer()
+            Picker("", selection: $selectedSubtitleLanguage) {
+                ForEach(["None"] + Locale.commonLanguages, id: \.self) { language in
+                    Text(language.localized).tag(language)
+                }
+            }
+            .pickerStyle(.menu)
+            .frame(maxWidth: 200)
+            .onChange(of: selectedSubtitleLanguage) { newValue in
+                subtitleSettings.language = newValue == "None" ? nil : newValue
+                subtitleSettings.save()
+            }
+        }
+        .font(.system(size: theme.fontSize, weight: .medium))
+        .onAppear {
+            selectedSubtitleLanguage = subtitleSettings.language ?? "None"
+        }
+        #endif
     }
     
+    #if os(tvOS) || os(iOS)
     var subtitleLanguageAlert: ActionSheet {
         let values = ["None"] + Locale.commonLanguages
         let actions = values.map ({ language -> Alert.Button in
