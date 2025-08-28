@@ -141,7 +141,7 @@ extension ExtendedSubtitlesView {
 
 struct ExtendedSubtitlesView_Previews: PreviewProvider {
     static var previews: some View {
-        let subtitle = Subtitle(name: "Test long testing running on this device", language: "English", link: "", ISO639: "", rating: 0)
+        let subtitle = Subtitle(name: "Test long testing running on this device", language: "English", fileId: 0, fileName: "", ISO639: "")
         Group {
             ExtendedSubtitlesView(
                 currentSubtitle: .constant(subtitle),

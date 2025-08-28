@@ -89,6 +89,22 @@ public func downloadSubtitleFile(_ url: String,
         return destinationUrl
 }
 
+/**
+ Download OpenSubtitles file using fileId and API v1 download endpoint
+ 
+ - Parameter subtitle: The subtitle object containing fileId and fileName
+ - Parameter downloadDirectory: Download location. Defaults to NSTemporaryDirectory/Subtitles
+ - Returns: Local file URL of downloaded subtitle
+ */
+public func downloadOpenSubtitleFile(_ subtitle: Subtitle, downloadDirectory directory: URL = URL(fileURLWithPath: NSTemporaryDirectory())) async throws -> URL {
+        
+        // Get download URL from OpenSubtitles API
+        let downloadUrl = try await SubtitlesApi.shared.downloadSubtitle(fileId: subtitle.fileId)
+        
+        // Download the file using the returned URL
+        return try await downloadSubtitleFile(downloadUrl, downloadDirectory: directory)
+}
+
 public func serverURL() -> String {
     return Session.popcornBaseUrls ?? ""
 }

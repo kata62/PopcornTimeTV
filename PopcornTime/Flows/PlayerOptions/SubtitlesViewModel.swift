@@ -31,7 +31,7 @@ class SubtitlesViewModel: ObservableObject {
     
     func generateSubtitles(currentSubtitle: Subtitle?) -> [Subtitle] {
         var newSubtitles = [currentSubtitle ?? subtitles[enLocale.localizedCapitalized]?.first ?? subtitles[subtitles.keys.first!]!.first!,
-                         Subtitle(name: "", language: selectOther, link: "", ISO639: "", rating: 0.0)]//insert predetermined subtitle or english or first available whichever exists
+                            Subtitle(name: "", language: selectOther, fileId:0, fileName: "", ISO639: "")]//insert predetermined subtitle or english or first available whichever exists
         for unknownSubtitle in SubtitleSettings.shared.subtitlesSelectedForVideo {
             if let subtitle = unknownSubtitle as? Subtitle {
                 if !newSubtitles.contains(subtitle){

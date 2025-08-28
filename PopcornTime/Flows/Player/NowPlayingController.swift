@@ -19,12 +19,12 @@ import PopcornKit
 import Kingfisher
 
 class NowPlayingController {
-    private (set) var mediaplayer: VLCMediaPlayer
-    private (set) var media: Media
+    private(set) var mediaplayer: VLCMediaPlayer
+    private(set) var media: Media
     private var imageGenerator: AVAssetImageGenerator
     var onPlayPause: () -> Void = {}
     
-    private (set) var mediaThumbnailer: VLCMediaThumbnailer?
+    private(set) var mediaThumbnailer: VLCMediaThumbnailer?
     var onThumbnailCompletion: (_ image: CGImage) -> Void = { _ in }
     
     internal var nowPlayingInfo: [String: Any]? {

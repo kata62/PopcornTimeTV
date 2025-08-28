@@ -33,12 +33,12 @@ enum TransportBarHint: String {
 
 class PlayerViewModel: NSObject, ObservableObject {
     var media: Media
-    private (set) var mediaplayer = VLCMediaPlayer()
+    private(set) var mediaplayer = VLCMediaPlayer()
     private var nowPlaying: NowPlayingController
     var audioController: PlayerAudioModel
     var subtitleController: PlayerSubtitleModel
     
-    private (set) var streamer: PTTorrentStreamer
+    private(set) var streamer: PTTorrentStreamer
     
     private var idleWorkItem: DispatchWorkItem?
     internal var workItem: DispatchWorkItem?

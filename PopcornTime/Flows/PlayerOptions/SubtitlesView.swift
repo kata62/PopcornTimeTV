@@ -200,7 +200,7 @@ extension SubtitlesView {
 
 struct SubtitlesView_Previews: PreviewProvider {
     static var previews: some View {
-        let subtitle = Subtitle(name: "Test", language: "English", link: "", ISO639: "", rating: 0)
+        let subtitle = Subtitle(name: "Test", language: "English", fileId: 0, fileName: "", ISO639: "")
         let encoding = SubtitleSettings.encodings.values.first!
         let enKey: String = Locale.current.localizedString(forLanguageCode: "en") ?? ""
         let subtitles: Dictionary<String, [Subtitle]> = [enKey : [subtitle]]

@@ -90,14 +90,36 @@ public struct Fanart {
 }
 
 public struct OpenSubtitles {
-    static let base = "https://rest.opensubtitles.org/"
-    static let userAgent = "Popcorn Time NodeJS"
+    static let base = "https://api.opensubtitles.com/api/v1/"
+    static let userAgent = "Popcorn v1"
+    static let apiKey = "ljnc55mUqXwU9OZcxC4Hf6ZqJ1WPVMIn"
+    static let login = "login"
+    static let logout = "logout"
+    static let subtitles = "subtitles"
+    static let download = "download"
+    static let features = "features"
+    static let userInfo = "infos/user"
+    static let guessit = "utilities/guessit"
     
-//    static let logIn = "LogIn"
-//    static let logOut = "LogOut"
-    static let search = "search/"
+    // Discovery endpoints
+    struct Discover {
+        static let popular = "discover/popular"
+        static let latest = "discover/latest"
+        static let mostDownloaded = "discover/most_downloaded"
+    }
     
-    static let defaultHeaders = ["User-Agent": OpenSubtitles.userAgent]
+    static let defaultHeaders = [
+        "User-Agent": OpenSubtitles.userAgent,
+        "Api-Key": apiKey,
+        "Accept": "application/json"
+    ]
+    
+    static func authenticatedHeaders(with bearerToken: String) -> [String: String] {
+        var headers = defaultHeaders
+        headers["Authorization"] = "Bearer \(bearerToken)"
+        headers["Content-Type"] = "application/json"
+        return headers
+    }
 }
 
 //public struct OMDb {

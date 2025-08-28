@@ -18,9 +18,9 @@ import VLCKit
 import PopcornKit
 
 class PlayerSubtitleModel {
-    private (set) var media: Media
-    private (set) var mediaplayer: VLCMediaPlayer
-    private (set) var downloadDirectory: URL
+    private(set) var media: Media
+    private(set) var mediaplayer: VLCMediaPlayer
+    private(set) var downloadDirectory: URL
     private let NSNotFound: Int32 = -1
     let settings = SubtitleSettings.shared
     var currentSubtitle: Subtitle?
@@ -47,13 +47,19 @@ class PlayerSubtitleModel {
     func loadSubtitles(localPathToMedia: URL) {
         if media.subtitles.count == 0 {
             Task { @MainActor in
-                var subtitles = (try? await media.getSubtitles()) ?? [:]
-                if subtitles.isEmpty {
-                    subtitles = try await media.getSubtitles(orWithFilePath: localPathToMedia)
+                do {
+                    var subtitles = try await media.getSubtitles()
+                    if subtitles.isEmpty {
+                        subtitles = try await media.getSubtitles(orWithFilePath: localPathToMedia)
+                    }
+                    
+                    self.media.subtitles = subtitles
+                    configureUserDefaultSubtitle()
+                } catch (let error){
+                    print(error)
                 }
                 
-                self.media.subtitles = subtitles
-                configureUserDefaultSubtitle()
+                
             }
         } else {
             configureUserDefaultSubtitle()
@@ -70,7 +76,14 @@ class PlayerSubtitleModel {
     func configurePlayer(subtitle: Subtitle?) {
         if let subtitle = subtitle {
             Task { @MainActor in
-                let subtitlePath = try await PopcornKit.downloadSubtitleFile(subtitle.link, downloadDirectory: downloadDirectory)
+                let subtitlePath: URL
+                if subtitle.fileId > 0 {
+                    // Use OpenSubtitles API v1 download for subtitles with fileId
+                    subtitlePath = try await PopcornKit.downloadOpenSubtitleFile(subtitle, downloadDirectory: downloadDirectory)
+                } else {
+                    print("Subtitle has no fileId or link - cannot download")
+                    return
+                }
                 self.mediaplayer.addPlaybackSlave(subtitlePath, type: .subtitle, enforce: true)
             }
         } else {

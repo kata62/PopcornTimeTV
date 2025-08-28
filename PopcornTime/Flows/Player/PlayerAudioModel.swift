@@ -18,7 +18,7 @@ import VLCKit
 import AVKit
 
 class PlayerAudioModel {
-    private (set) var mediaplayer: VLCMediaPlayer
+    private(set) var mediaplayer: VLCMediaPlayer
     var audioProfile: EqualizerProfiles = .fullDynamicRange
     var audioProfileBinding: Binding<EqualizerProfiles> = .constant(.fullDynamicRange)
     var audioDelayBinding: Binding<Int> = .constant(0)

@@ -30,6 +30,11 @@ struct SettingsView: View {
     
     @State var showClearCacheAlert = false
     
+    @State var showOpenSubtitlesLogin = false
+    @State var showOpenSubtitlesLogout = false
+    @State var openSubtitlesUsername = ""
+    @State var openSubtitlesPassword = ""
+    
     
     var body: some View {
         HStack (spacing: theme.hStackSpacing) {
@@ -58,6 +63,7 @@ struct SettingsView: View {
                 #endif
                 Section(header: sectionHeader("Services")) {
                     trackButton
+                    openSubtitlesButton
                 }
                 
                 Section(header: sectionHeader("Info")) {
@@ -336,6 +342,61 @@ struct SettingsView: View {
             viewModel.validate(traktUrl: url)
         }
         #endif
+    }
+    
+    @ViewBuilder
+    var openSubtitlesButton: some View {
+        let buttonValue = viewModel.isOpenSubtitlesLoggedIn ? "Sign Out".localized : "Sign In".localized
+        
+        button(text: "OpenSubtitles.com", value: buttonValue) {
+            if viewModel.isOpenSubtitlesLoggedIn {
+                showOpenSubtitlesLogout = true
+            } else {
+                showOpenSubtitlesLogin = true
+            }
+        }
+        .alert("OpenSubtitles.com", isPresented: $showOpenSubtitlesLogin) {
+            TextField("Username", text: $openSubtitlesUsername)
+                .textContentType(.username)
+                .textCase(.lowercase)
+            SecureField("Password", text: $openSubtitlesPassword)
+                .textContentType(.password)
+            
+            Button("Cancel") {
+                showOpenSubtitlesLogin = false
+                openSubtitlesUsername = ""
+                openSubtitlesPassword = ""
+                viewModel.openSubtitlesLoginError = nil
+            }
+            
+            Button("Login") {
+                viewModel.openSubtitlesLogin(username: openSubtitlesUsername, password: openSubtitlesPassword)
+            }
+            .disabled(openSubtitlesUsername.isEmpty || openSubtitlesPassword.isEmpty || viewModel.isOpenSubtitlesLoggingIn)
+        } message: {
+            if let error = viewModel.openSubtitlesLoginError {
+                Text("Error: \(error)")
+            } else if viewModel.isOpenSubtitlesLoggingIn {
+                Text("Signing in...")
+            } else {
+                Text("Sign in to your account to download subtitles")
+            }
+        }
+        .confirmationDialog("Sign Out", isPresented: $showOpenSubtitlesLogout, actions: {
+            Button("Sign Out") {
+                viewModel.openSubtitlesLogout()
+            }
+            Button("Cancel", role: .cancel) { }
+        }, message: {
+            Text("Are you sure you want to sign out of OpenSubtitles?")
+        })
+        .onChange(of: viewModel.isOpenSubtitlesLoggedIn) { loggedIn in
+            if loggedIn {
+                showOpenSubtitlesLogin = false
+                openSubtitlesUsername = ""
+                openSubtitlesPassword = ""
+            }
+        }
     }
     
     func button(text: LocalizedStringKey, value: String, action: @escaping () -> Void) -> some View {

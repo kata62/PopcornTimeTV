@@ -18,6 +18,11 @@ class SettingsViewModel: ObservableObject {
         return TraktAuthApi.shared.authorizationUrl(appScheme: AppScheme)
     }
     
+    // MARK: - OpenSubtitles
+    @Published var isOpenSubtitlesLoggedIn: Bool = SubtitlesApi.shared.isLoggedIn
+    @Published var isOpenSubtitlesLoggingIn: Bool = false
+    @Published var openSubtitlesLoginError: String?
+    
     var lastUpdate: String {
         var date = "Never".localized
         if let lastChecked = Session.lastVersionCheckPerformedOnDate {
@@ -48,6 +53,39 @@ class SettingsViewModel: ObservableObject {
     func traktDidLoggedIn() {
         isTraktLoggedIn = true
         TraktApi.shared.syncUserData()
+    }
+    
+    // MARK: - OpenSubtitles Methods
+    func openSubtitlesLogin(username: String, password: String) {
+        guard !username.isEmpty && !password.isEmpty else { return }
+        
+        isOpenSubtitlesLoggingIn = true
+        openSubtitlesLoginError = nil
+        
+        Task { @MainActor in
+            do {
+                _ = try await SubtitlesApi.shared.login(username: username, password: password)
+                self.isOpenSubtitlesLoggedIn = true
+                self.isOpenSubtitlesLoggingIn = false
+                self.openSubtitlesLoginError = nil
+            } catch {
+                self.isOpenSubtitlesLoggingIn = false
+                self.openSubtitlesLoginError = error.localizedDescription
+            }
+        }
+    }
+    
+    func openSubtitlesLogout() {
+        Task { @MainActor in
+            do {
+                try await SubtitlesApi.shared.logout()
+                self.isOpenSubtitlesLoggedIn = false
+            } catch {
+                print("OpenSubtitles logout error: \(error)")
+                // Even if logout fails, clear the local state
+                self.isOpenSubtitlesLoggedIn = false
+            }
+        }
     }
     
     @Published var serverUrl: String = PopcornKit.serverURL()

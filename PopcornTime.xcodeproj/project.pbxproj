@@ -23,7 +23,7 @@
 		230C082526BD3D3C00989E7F /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4D990E321DC4F028005CDE34 /* Images.xcassets */; };
 		230C65FF284B207F00CA59F8 /* VLCKit.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2349FE9F283AD72E00F0138C /* VLCKit.xcframework */; };
 		230C6600284B207F00CA59F8 /* VLCKit.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 2349FE9F283AD72E00F0138C /* VLCKit.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		23166C012694EE6E00D87AD0 /* TopShelf.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 23E4976626947E1300175DEE /* TopShelf.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		23166C012694EE6E00D87AD0 /* TopShelf.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 23E4976626947E1300175DEE /* TopShelf.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		232BB5242694562C005448AE /* PopcornTorrent in Frameworks */ = {isa = PBXBuildFile; productRef = 232BB5232694562C005448AE /* PopcornTorrent */; };
 		232BB527269456BF005448AE /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = 232BB526269456BF005448AE /* Kingfisher */; };
 		23313B00267E374F00774A85 /* App.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23313AFF267E374F00774A85 /* App.swift */; };
@@ -386,15 +386,15 @@
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		23166C042694EE6E00D87AD0 /* Embed App Extensions */ = {
+		23166C042694EE6E00D87AD0 /* Embed Foundation Extensions */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
 			dstPath = "";
 			dstSubfolderSpec = 13;
 			files = (
-				23166C012694EE6E00D87AD0 /* TopShelf.appex in Embed App Extensions */,
+				23166C012694EE6E00D87AD0 /* TopShelf.appex in Embed Foundation Extensions */,
 			);
-			name = "Embed App Extensions";
+			name = "Embed Foundation Extensions";
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 		23313B52267E4A3D00774A85 /* Embed Frameworks */ = {
@@ -982,7 +982,7 @@
 				23313AFA267E374F00774A85 /* Frameworks */,
 				23313AFB267E374F00774A85 /* Resources */,
 				23313B52267E4A3D00774A85 /* Embed Frameworks */,
-				23166C042694EE6E00D87AD0 /* Embed App Extensions */,
+				23166C042694EE6E00D87AD0 /* Embed Foundation Extensions */,
 			);
 			buildRules = (
 			);
@@ -1074,9 +1074,10 @@
 		287B852C1C9873A200EEF5C8 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
+				BuildIndependentTargetsInParallel = YES;
 				CLASSPREFIX = PCT;
 				LastSwiftUpdateCheck = 1250;
-				LastUpgradeCheck = 1310;
+				LastUpgradeCheck = 1640;
 				ORGANIZATIONNAME = PopcornTime;
 				TargetAttributes = {
 					23313AFC267E374F00774A85 = {
@@ -1545,7 +1546,6 @@
 		23313B09267E375100774A85 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = "App Icon & Top Shelf Image";
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CLANG_ANALYZER_NONNULL = YES;
@@ -1593,7 +1593,6 @@
 		23313B0A267E375100774A85 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = "App Icon & Top Shelf Image";
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CLANG_ANALYZER_NONNULL = YES;
@@ -1731,6 +1730,7 @@
 				CODE_SIGN_STYLE = Manual;
 				COMBINE_HIDPI_IMAGES = YES;
 				COPY_PHASE_STRIP = NO;
+				DEAD_CODE_STRIPPING = YES;
 				DEVELOPMENT_TEAM = "";
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
@@ -1780,6 +1780,7 @@
 				CODE_SIGN_STYLE = Manual;
 				COMBINE_HIDPI_IMAGES = YES;
 				COPY_PHASE_STRIP = NO;
+				DEAD_CODE_STRIPPING = YES;
 				DEVELOPMENT_TEAM = "";
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
@@ -1911,6 +1912,7 @@
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_OPTIMIZATION_LEVEL = 0;
@@ -1963,6 +1965,7 @@
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
