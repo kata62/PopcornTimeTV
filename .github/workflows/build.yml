@@ -86,7 +86,13 @@ jobs:
         key: ${{ runner.os }}-spm-${{ hashFiles('PopcornTime.xcodeproj/project.xcworkspace/xcshareddata/swiftpm/Package.resolved') }}
         restore-keys: |
             ${{ runner.os }}-spm-${{ hashFiles('PopcornTime.xcodeproj/project.xcworkspace/xcshareddata/swiftpm/Package.resolved') }}
-                
+
+    - name: Download iOS platform
+      run: |
+          xcodebuild -downloadPlatform iOS
+          xcodebuild -showsdks
+          xcodebuild -scheme PopcornTime\ \(iOS\) -showdestinations || true
+
     - name: Compile
       run: |
         xcodebuild archive \
