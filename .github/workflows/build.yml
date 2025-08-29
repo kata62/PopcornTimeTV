@@ -38,8 +38,7 @@ jobs:
           -configuration Release \
           CODE_SIGN_IDENTITY= \
           CODE_SIGNING_REQUIRED=NO \
-          CODE_SIGNING_ALLOWED=NO \
-          VALID_ARCHS=arm64
+          CODE_SIGNING_ALLOWED=NO
         
     - name: Package
       run: |
@@ -96,8 +95,7 @@ jobs:
           -configuration Release \
           CODE_SIGN_IDENTITY= \
           CODE_SIGNING_REQUIRED=NO \
-          CODE_SIGNING_ALLOWED=NO \
-          VALID_ARCHS=arm64
+          CODE_SIGNING_ALLOWED=NO
         
     - name: Package
       run: |
