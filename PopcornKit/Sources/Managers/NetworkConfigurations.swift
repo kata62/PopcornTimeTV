@@ -132,7 +132,7 @@ public struct OpenSubtitles {
 
 // cloudflare cached version of above
 public struct OMDb {
-    static let base = "http://reviews.randomrush.site"
+    static let base = "https://reviews.randomrush.work"
     static let info = "i"
     
     static let defaultParameters: [String: String] = [:]
@@ -140,7 +140,7 @@ public struct OMDb {
 
 // cloudflare cached version of above
 public struct DHT {
-    static let base = "https://dht.randomrush.site"
+    static let base = "https://popcorn-dht.8mdm9hjd2h.workers.dev"
     
     static let defaultParameters: [String: String] = [:]
 }
