@@ -89,7 +89,7 @@ jobs:
 
     - name: Download iOS platform
       run: |
-          # xcodebuild -downloadPlatform iOS
+          xcodebuild -downloadPlatform iOS -exportPath ~/Downloads
           xcodebuild -showsdks
           xcodebuild -scheme PopcornTime\ \(iOS\) -showdestinations || true
 
