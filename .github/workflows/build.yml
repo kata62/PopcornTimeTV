@@ -6,62 +6,62 @@ on:
     - cron: '0 0 1 * *' # "At 00:00 on the 1st of every month"
 
 jobs:
-  # build-tvos:
-  #   name: tvOS
+  build-tvos:
+    name: tvOS
 
-  #   runs-on: macos-latest
+    runs-on: macos-14
 
-  #   steps:
-  #   - uses: actions/checkout@v4
+    steps:
+    - uses: actions/checkout@v4
         
-  #   - name: "Get cache: VLC"
-  #     uses: actions/cache@v4
-  #     id: cache
-  #     with:
-  #       path: |
-  #         VLCKit
-  #       key: ${{ hashFiles('VLCKit/get-vlc-frameworks.sh') }}-tv
+    - name: "Get cache: VLC"
+      uses: actions/cache@v4
+      id: cache
+      with:
+        path: |
+          VLCKit
+        key: ${{ hashFiles('VLCKit/get-vlc-frameworks.sh') }}-tv
         
-  #   - uses: actions/cache@v4
-  #     name: "Get cache: SPM"
-  #     with:
-  #       path: ~/Library/Developer/Xcode/DerivedData/PopcornTime*/SourcePackages/
-  #       key: ${{ runner.os }}-spm-${{ hashFiles('PopcornTime.xcodeproj/project.xcworkspace/xcshareddata/swiftpm/Package.resolved') }}
-  #       restore-keys: |
-  #           ${{ runner.os }}-spm-${{ hashFiles('PopcornTime.xcodeproj/project.xcworkspace/xcshareddata/swiftpm/Package.resolved') }}
+    - uses: actions/cache@v4
+      name: "Get cache: SPM"
+      with:
+        path: ~/Library/Developer/Xcode/DerivedData/PopcornTime*/SourcePackages/
+        key: ${{ runner.os }}-spm-${{ hashFiles('PopcornTime.xcodeproj/project.xcworkspace/xcshareddata/swiftpm/Package.resolved') }}
+        restore-keys: |
+            ${{ runner.os }}-spm-${{ hashFiles('PopcornTime.xcodeproj/project.xcworkspace/xcshareddata/swiftpm/Package.resolved') }}
                 
-  #   - name: Compile
-  #     run: |
-  #       xcodebuild archive \
-  #         -project PopcornTime.xcodeproj \
-  #         -scheme PopcornTime\ \(tvOS\) \
-  #         -configuration Release \
-  #         CODE_SIGN_IDENTITY= \
-  #         CODE_SIGNING_REQUIRED=NO \
-  #         CODE_SIGNING_ALLOWED=NO
+    - name: Compile
+      run: |
+        xcodebuild archive \
+          -project PopcornTime.xcodeproj \
+          -scheme PopcornTime\ \(tvOS\) \
+          -configuration Release \
+          CODE_SIGN_IDENTITY= \
+          CODE_SIGNING_REQUIRED=NO \
+          CODE_SIGNING_ALLOWED=NO
         
-  #   - name: Package
-  #     run: |
-  #       mkdir Payload
-  #       cp -r ~/Library/Developer/Xcode/Archives/*/*/Products/Applications/PopcornTime\ \(tvOS\).app Payload
-  #       wget https://github.com/sbingner/ldid/releases/download/v2.1.4+16.g5b8581c/ldid-osx.gz
-  #       gunzip ldid-osx.gz
-  #       chmod +x ldid-osx
-  #       ./ldid-osx -S Payload/PopcornTime\ \(tvOS\).app/PopcornTime\ \(tvOS\)
-  #       zip -r PopcornTime-tvOS.ipa Payload
+    - name: Package
+      run: |
+        mkdir Payload
+        cp -r ~/Library/Developer/Xcode/Archives/*/*/Products/Applications/PopcornTime\ \(tvOS\).app Payload
+        wget https://github.com/sbingner/ldid/releases/download/v2.1.4+16.g5b8581c/ldid-osx.gz
+        gunzip ldid-osx.gz
+        chmod +x ldid-osx
+        ./ldid-osx -S Payload/PopcornTime\ \(tvOS\).app/PopcornTime\ \(tvOS\)
+        zip -r PopcornTime-tvOS.ipa Payload
         
-  #   - name: Upload
-  #     uses: actions/upload-artifact@v4
-  #     with:
-  #       name: 'PopcornTime-tvOS'
-  #       path: |
-  #         PopcornTime-tvOS.ipa
+    - name: Upload
+      uses: actions/upload-artifact@v4
+      with:
+        name: 'PopcornTime-tvOS'
+        path: |
+          PopcornTime-tvOS.ipa
 
-  #   - name: Release
-  #     uses: softprops/action-gh-release@v2
-  #     if: startsWith(github.ref, 'refs/tags/')
-  #     with:
-  #       files: PopcornTime-tvOS.ipa
+    - name: Release
+      uses: softprops/action-gh-release@v2
+      if: startsWith(github.ref, 'refs/tags/')
+      with:
+        files: PopcornTime-tvOS.ipa
           
   build-ios:
     name: iOS
@@ -127,56 +127,56 @@ jobs:
       with:
         files: PopcornTime-iOS.ipa
 
-  # build-macos:
-  #   name: macOS
+  build-macos:
+    name: macOS
 
-  #   runs-on: macos-latest
+    runs-on: macos-latest
 
-  #   steps:
-  #   - uses: actions/checkout@v4
+    steps:
+    - uses: actions/checkout@v4
         
-  #   - name: "Get cache: VLC"
-  #     uses: actions/cache@v4
-  #     id: cache
-  #     with:
-  #       path: |
-  #         VLCKit
-  #       key: ${{ hashFiles('VLCKit/get-vlc-frameworks.sh') }}-macos
+    - name: "Get cache: VLC"
+      uses: actions/cache@v4
+      id: cache
+      with:
+        path: |
+          VLCKit
+        key: ${{ hashFiles('VLCKit/get-vlc-frameworks.sh') }}-macos
         
-  #   - uses: actions/cache@v4
-  #     name: "Get cache: SPM"
-  #     with:
-  #       path: ~/Library/Developer/Xcode/DerivedData/PopcornTime*/SourcePackages/
-  #       key: ${{ runner.os }}-spm-${{ hashFiles('PopcornTime.xcodeproj/project.xcworkspace/xcshareddata/swiftpm/Package.resolved') }}
-  #       restore-keys: |
-  #           ${{ runner.os }}-spm-${{ hashFiles('PopcornTime.xcodeproj/project.xcworkspace/xcshareddata/swiftpm/Package.resolved') }}
+    - uses: actions/cache@v4
+      name: "Get cache: SPM"
+      with:
+        path: ~/Library/Developer/Xcode/DerivedData/PopcornTime*/SourcePackages/
+        key: ${{ runner.os }}-spm-${{ hashFiles('PopcornTime.xcodeproj/project.xcworkspace/xcshareddata/swiftpm/Package.resolved') }}
+        restore-keys: |
+            ${{ runner.os }}-spm-${{ hashFiles('PopcornTime.xcodeproj/project.xcworkspace/xcshareddata/swiftpm/Package.resolved') }}
                 
-  #   # - name: Select Xcode version
-  #   #   run: sudo xcode-select -s '/Applications/Xcode_14.1.app/Contents/Developer'
+    # - name: Select Xcode version
+    #   run: sudo xcode-select -s '/Applications/Xcode_14.1.app/Contents/Developer'
 
-  #   - name: Compile
-  #     run: |
-  #       xcodebuild archive \
-  #         -project PopcornTime.xcodeproj \
-  #         -scheme PopcornTime\ \(macOS\) \
-  #         -configuration Release \
-  #         CODE_SIGN_IDENTITY= \
-  #         CODE_SIGNING_REQUIRED=NO \
-  #         CODE_SIGNING_ALLOWED=NO \
-  #         VALID_ARCHS="arm64 x86_64"
+    - name: Compile
+      run: |
+        xcodebuild archive \
+          -project PopcornTime.xcodeproj \
+          -scheme PopcornTime\ \(macOS\) \
+          -configuration Release \
+          CODE_SIGN_IDENTITY= \
+          CODE_SIGNING_REQUIRED=NO \
+          CODE_SIGNING_ALLOWED=NO \
+          VALID_ARCHS="arm64 x86_64"
         
-  #   - name: Package
-  #     run: |
-  #       mkdir Payload
-  #       cp -r ~/Library/Developer/Xcode/Archives/*/*/Products/Applications/ Payload
-  #       zip -r PopcornTime-macOS.zip Payload
+    - name: Package
+      run: |
+        mkdir Payload
+        cp -r ~/Library/Developer/Xcode/Archives/*/*/Products/Applications/ Payload
+        zip -r PopcornTime-macOS.zip Payload
         
-  #   - name: Upload
-  #     uses: actions/upload-artifact@v4
-  #     with:
-  #       name: 'PopcornTime-macOS'
-  #       path: |
-  #         PopcornTime-macOS.zip
+    - name: Upload
+      uses: actions/upload-artifact@v4
+      with:
+        name: 'PopcornTime-macOS'
+        path: |
+          PopcornTime-macOS.zip
 
   #   - name: Release
   #     uses: softprops/action-gh-release@v2
